@@ -130,7 +130,8 @@
                         BackgroundColor="MediumBlue"
                         x:Name="buttonOption"
                         IsVisible="True"
-                        CornerRadius="25">
+                        CornerRadius="25"
+                        Clicked="ButtonOption_Clicked">
                 </Button>
 
                 <Button Text="Cancel option"

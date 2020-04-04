@@ -1,4 +1,5 @@
-﻿using GuletHolidayApp.Models;
+﻿using GuletHolidayApp.Controller;
+using GuletHolidayApp.Models;
 using GuletHolidayApp.Utility;
 using System;
 using System.Collections.Generic;
@@ -14,10 +15,13 @@ namespace GuletHolidayApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ReservationDetailPage : ContentPage
     {
+        private ReservationDto reservation;
         public ReservationDetailPage(ReservationDto reservation)
         {
             if (reservation == null)
                 throw new ArgumentException();
+
+            this.reservation = reservation;
 
             BindingContext = reservation;
 
@@ -61,6 +65,27 @@ namespace GuletHolidayApp.Views
                 locationToPicker.IsVisible = false;
                 locationFromPicker.IsVisible = false;
             }
+
+            locationToPicker.ToString();
+
+        }
+
+        private async void ButtonOption_Clicked(object sender, EventArgs e)
+        {
+            CreateController controller = new CreateController();
+            InfoResponseDto response = controller.GetInfo(reservation.yachtId, reservation.periodFrom, reservation.periodTo);
+            
+            if(ShipConstants.OK.Equals(response.status))
+            {
+                await DisplayAlert("OPTION", "Successful Option transaction", "OK");
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                await DisplayAlert("ERROR!", response.status, "OK");
+            }
+
+            
         }
     }
 }

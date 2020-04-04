@@ -10,19 +10,28 @@ namespace GuletHolidayApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListPage : ContentPage
     {
-
+        //int yachtId = 0;
         public ListPage(UserDto user)
         {
             
             InitializeComponent();
 
+            yachtIdLabel.Text = user.GetYachtId().ToString();
+            //yachtId = user.GetYachtId();
 
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            //DateTime.Now.Year.ToString()
             ReservationController reservationController = new ReservationController();
-            ReservationResponseDto response = reservationController.GetReservations(user.GetYachtId(), "2020");
-            if(ShipConstants.OK.Equals(response.status))
+            ReservationResponseDto response = reservationController.GetReservations(int.Parse(yachtIdLabel.Text), "2020");
+            //ReservationResponseDto response = reservationController.GetReservations(yachtId, "2020");
+            if (ShipConstants.OK.Equals(response.status))
             {
                 listView.ItemsSource = response.reservations;
-            }else
+            }
+            else
             {
                 DisplayAlert("Error!", response.status, "OK");
             }
