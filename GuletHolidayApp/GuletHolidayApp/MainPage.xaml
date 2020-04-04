@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="GuletHolidayApp.MainPage">
+
+    <StackLayout>
+
+        <Label x:Name="id" ></Label>
+        <Label x:Name="username" ></Label>
+        <Label x:Name="password" ></Label>
+        <Label x:Name="yachtId" ></Label>
+        <Label x:Name="yachtName" ></Label>
+        <Label x:Name="firstName" ></Label>
+        <Label x:Name="lastName" ></Label>
+        
+        <Button Text="Next" Clicked="OnNext"></Button>
+
+    </StackLayout>
+
+</ContentPage>

@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage NavigationPage.HasBackButton="False"
+             Title="Reservation Page"
+             NavigationPage.HasNavigationBar="True"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GuletHolidayApp.Utility"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:localPicture="clr-namespace:GuletHolidayApp.MarkupExtentions"
+             mc:Ignorable="d"
+             x:Class="GuletHolidayApp.Views.ListPage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+                IconImageSource= "{localPicture:EmbeddedImage GuletHolidayApp.Images.Logout.png}"
+                Order="Primary"
+                Priority="0"
+                Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IdToLocationConverter x:Key="idToLocation"/>
+            <local:ReservationTypeToColorConverter x:Key="typeToColor"/>
+            <local:ReservationTypeToColorBoxConverter x:Key="typeToColorBox"/>
+            <local:ReservationTypeToColorTextConverter x:Key="typeToColorText"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid BackgroundColor= "#7029AF" Padding="0,0,0,0">
+                <ListView x:Name="listView" ItemSelected="ListView_ItemSelected" SeparatorColor="#000000" Visual="Material" RowHeight="70">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Margin="0,0,0,0" BackgroundColor="{Binding reservationType, Converter={StaticResource typeToColor}}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="200" />
+                                        <ColumnDefinition Width="100"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <BoxView Grid.Column="0" 
+                                                     BackgroundColor="{Binding reservationType, Converter={StaticResource typeToColorBox}}">
+                                    </BoxView>
+
+                                    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                        <Label Grid.Column="0" 
+                                                        MinimumWidthRequest="100"
+                                                        Margin="5,0,0,5"
+                                                        Text="{Binding periodFrom}"
+                                                        TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
+                                                        HorizontalOptions="Center"
+                                                        VerticalTextAlignment="Center">
+                                        </Label>
+                                        <Label Grid.Column="0" 
+                                                    MinimumWidthRequest="100"
+                                                    Margin="5,5,0,0"
+                                                    Text="{Binding periodTo}"
+                                                    TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
+                                                    HorizontalOptions="Center"
+                                                    VerticalTextAlignment="Center">
+                                        </Label>
+                                    </StackLayout>
+
+                                    <Label Grid.Column="1"
+                                                MinimumWidthRequest="200"
+                                                Text="{Binding locationFromId, Converter={StaticResource idToLocation}}"
+                                                TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
+                                                Margin="0,5,0,5"
+                                                HorizontalOptions="CenterAndExpand"
+                                                VerticalTextAlignment="Center">
+                                    </Label>
+
+                                    <BoxView Grid.Column="2" 
+                                                     BackgroundColor="{Binding reservationType, Converter={StaticResource typeToColorBox}}">
+                                    </BoxView>
+                                    <Label Grid.Column="2"
+                                                    MinimumHeightRequest="100"
+                                                    Margin="5,0,0,0"
+                                                    Text="{Binding reservationType}"
+                                                    TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
+                                                    HorizontalOptions="CenterAndExpand"
+                                                    VerticalTextAlignment="Center">
+                                    </Label>
+
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage Title="{Binding reservationType, StringFormat='{0}'}" 
+            xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:local="clr-namespace:GuletHolidayApp.Utility"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             BackgroundImageSource="Background.jpg"
+             x:Class="GuletHolidayApp.Views.ReservationDetailPage">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Example Item"
+                 Order="Primary"
+                 Priority="0" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:IdToSingleLocationConverter x:Key="idToSingleLocation"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" Margin="20,30,20,30">
+
+            <BoxView 
+                HeightRequest="1" 
+                BackgroundColor="LightGray" 
+                HorizontalOptions="FillAndExpand">
+            </BoxView>
+
+            <StackLayout Orientation="Horizontal" HeightRequest="40">
+                <Label Text="Season: " VerticalOptions="Center"></Label>
+                <Label x:Name="season" VerticalOptions="Center"></Label>
+            </StackLayout>
+
+            <BoxView 
+                HeightRequest="1" 
+                BackgroundColor="LightGray" 
+                HorizontalOptions="FillAndExpand">
+            </BoxView>
+
+            <StackLayout Orientation="Horizontal" HeightRequest="40">
+                <Label Text="{Binding reservationType, StringFormat='Reservation type: {0}'}" VerticalOptions="Center"></Label>
+                <Label x:Name="reservationType" VerticalOptions="Center"></Label>
+            </StackLayout>
+
+            <BoxView 
+                HeightRequest="1" 
+                BackgroundColor="LightGray" 
+                HorizontalOptions="FillAndExpand">
+            </BoxView>
+            
+
+            <StackLayout Orientation="Horizontal" HeightRequest="40">
+                <Label Text="{Binding periodFrom, StringFormat='Period from: {0}'}" VerticalOptions="Center"></Label>
+                <Label x:Name="periodFrom" VerticalOptions="Center"></Label>
+            </StackLayout>
+
+            <BoxView 
+                HeightRequest="1" 
+                BackgroundColor="LightGray" 
+                HorizontalOptions="FillAndExpand">
+            </BoxView>
+
+            <StackLayout Orientation="Horizontal" HeightRequest="40">
+                <Label Text="{Binding periodTo, StringFormat='Period to: {0}'}" VerticalOptions="Center"></Label>
+                <Label x:Name="periodTo" VerticalOptions="Center"></Label>
+            </StackLayout>
+
+            <BoxView 
+                HeightRequest="1" 
+                BackgroundColor="LightGray" 
+                HorizontalOptions="FillAndExpand">
+            </BoxView>
+
+            <StackLayout Orientation="Horizontal" HeightRequest="40">
+                <Label Text="{Binding locationFromId, StringFormat='From: {0}', Converter={StaticResource idToSingleLocation}}" VerticalOptions="Center"></Label>
+                <Label x:Name="locationFrom" VerticalOptions="Center"></Label>
+                <Picker Title="Select Location"
+                        x:Name="locationFromPicker"
+                        HorizontalOptions="FillAndExpand">
+                </Picker>
+            </StackLayout>
+
+            <BoxView 
+                HeightRequest="1" 
+                BackgroundColor="LightGray" 
+                HorizontalOptions="FillAndExpand">
+            </BoxView>
+
+            <StackLayout Orientation="Horizontal" HeightRequest="40">
+                <Label Text="{Binding locationToId, StringFormat='To: {0}', Converter={StaticResource idToSingleLocation}}" VerticalOptions="Center"></Label>
+                <Label x:Name="locationTo" VerticalOptions="Center"></Label>
+                <Picker Title="Select Location"
+                        x:Name="locationToPicker"
+                        HorizontalOptions="FillAndExpand">
+                </Picker>
+            </StackLayout>
+
+            <BoxView 
+                HeightRequest="1" 
+                BackgroundColor="LightGray" 
+                HorizontalOptions="FillAndExpand">
+            </BoxView>
+
+
+            <ActivityIndicator x:Name="activityIndicator" IsVisible="False" IsEnabled="False" IsRunning="False"></ActivityIndicator>
+
+            <StackLayout VerticalOptions="EndAndExpand" Padding="0,40,0,40">
+                <Button Text="Reservation"
+                        BackgroundColor="#0CBC0C"
+                        x:Name="buttonReservation"
+                        IsVisible="True"
+                        TextColor="White"
+                        CornerRadius="25">
+                </Button>
+
+                <Button Text="Reservation"
+                        TextColor="White"
+                        BackgroundColor="#0CBC0C"
+                        x:Name="buttonReservationAfterOption"
+                        IsVisible="True"
+                        CornerRadius="25">
+                </Button>
+
+                <Button Text="Option"
+                        TextColor="White"
+                        BackgroundColor="MediumBlue"
+                        x:Name="buttonOption"
+                        IsVisible="True"
+                        CornerRadius="25">
+                </Button>
+
+                <Button Text="Cancel option"
+                        TextColor="White"
+                        BackgroundColor="Red"
+                        x:Name="buttonCancellation"
+                        IsVisible="True"
+                        CornerRadius="25">
+                </Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

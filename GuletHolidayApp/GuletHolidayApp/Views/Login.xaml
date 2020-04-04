@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage NavigationPage.HasNavigationBar="False"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:GuletHolidayApp.MarkupExtentions"
+             mc:Ignorable="d"
+             x:Class="GuletHolidayApp.Views.Login"
+             BackgroundImageSource="celestial2.jpg"
+             Visual="Material">
+
+    <Grid Margin="0,0,0,0">
+        <StackLayout Margin="30,30,30,0">
+            <AbsoluteLayout>
+                <ActivityIndicator x:Name="activity"  
+                       AbsoluteLayout.LayoutBounds="0.5, 0.5, 100, 100"
+                       AbsoluteLayout.LayoutFlags="PositionProportional" 
+                       IsRunning="True"
+                       IsVisible="False"            
+                       Color="White"  
+                       BackgroundColor="Transparent">
+                </ActivityIndicator>
+            </AbsoluteLayout>
+
+            <!--Image Source="{local:EmbeddedImage GuletHolidayApp.Images.Title.png}" Aspect="AspectFill"></!-->
+            <Image Source="Title2.png"></Image>
+
+            <Entry Placeholder="Username"
+               x:Name="usernameEntry"
+               BackgroundColor="Transparent"
+               TextColor="DarkGray"
+               PlaceholderColor="DarkGray">
+            </Entry>
+
+            <Entry Placeholder="Password"
+               x:Name="passwordEntry"
+               BackgroundColor="Transparent"
+               IsPassword="True"
+               PlaceholderColor="DarkGray"
+               TextColor="DarkGray">
+            </Entry>
+
+            <Grid Margin="0,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="200" />
+                </Grid.ColumnDefinitions>
+                
+                <CheckBox Grid.Column="0" x:Name="rememberMe" IsChecked="False" ></CheckBox>
+                <Label Grid.Column="1" Padding="0,14,0,0" Text="Remember me?"></Label>
+            </Grid>
+            
+
+            <Button x:Name="buttonLogin"
+                Text="Login"
+                TextColor="White"
+                BackgroundColor="#20D3D3D3"
+                BorderWidth="0"
+                BorderColor="Black"
+                FontSize="Medium"
+                CornerRadius="25"
+                Clicked="OnLogin">
+            </Button>
+
+            <Label
+                x:Name="warningLabel"
+                Padding="0,50,0,0"
+                Text="Warning! No internet connection!"
+                TextColor="Red"
+                IsVisible="False">
+            </Label>
+
+            <Label
+                x:Name="errorLabel"
+                Text="Error! No user found!"
+                TextColor="Red"
+                IsVisible="False">
+            </Label>
+
+            <!--Button x:Name="buttonNext"
+                Text="Next"
+                TextColor="White"
+                Clicked="buttonNext_Clicked">
+            </!-->
+
+        </StackLayout>
+    </Grid>
+
+</ContentPage>
