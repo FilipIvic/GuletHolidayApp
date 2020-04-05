@@ -69,6 +69,90 @@ namespace GuletHolidayApp.DAO
             return response;
         }
 
+        public OptionResponseDto StornoOption(int id, string uuid)
+        {
+            CredentialsDto credentials = GetCredentials();
+
+            StornoRequestDto request = new StornoRequestDto();
+            request.credentials = credentials;
+            request.id = id;
+            request.uuid = uuid;
+     
+            string json = JsonConvert.SerializeObject(request);
+            Console.WriteLine(json);
+            string url = "http://ws.nausys.com/CBMS-external/rest/booking/v6/stornoOption";
+            string result = CallNauSysApi(url, json);
+            Console.WriteLine(result);
+            OptionResponseDto response = JsonConvert.DeserializeObject<OptionResponseDto>(result);
+            return response;
+        }
+
+        public BookingResponseDto CreateBooking(int id, string uuid)
+        {
+            CredentialsDto credentials = GetCredentials();
+
+            BookingRequestDto request = new BookingRequestDto();
+            request.credentials = credentials;
+            request.id = id;
+            request.uuid = uuid;
+
+            string json = JsonConvert.SerializeObject(request);
+            string url = "http://ws.nausys.com/CBMS-external/rest/booking/v6/createBooking";
+            string result = CallNauSysApi(url, json);
+            BookingResponseDto response = JsonConvert.DeserializeObject<BookingResponseDto>(result);
+            return response;
+        }
+        public BookingResponseDto StornoBooking(int id, string uuid)
+        {
+            CredentialsDto credentials = GetCredentials();
+
+            BookingRequestDto request = new BookingRequestDto();
+            request.credentials = credentials;
+            request.id = id;
+            request.uuid = uuid;
+
+            string json = JsonConvert.SerializeObject(request);
+            Console.WriteLine(json);
+            string url = "http://ws.nausys.com/CBMS-external/rest/booking/v6/stornoBooking";
+            string result = CallNauSysApi(url, json);
+            Console.WriteLine(result);
+            BookingResponseDto response = JsonConvert.DeserializeObject<BookingResponseDto>(result);
+            return response;
+        }
+
+        public OptionsListResponseDto AllOptions(string periodFrom, string periodTo)
+        {
+            CredentialsDto credentials = GetCredentials();
+            OptionsListRequestDto request = new OptionsListRequestDto();
+            request.credentials = credentials;
+            request.periodFrom = periodFrom;
+            request.periodTo = periodTo;
+
+            string json = JsonConvert.SerializeObject(request);
+            Console.WriteLine(json);
+            string url = "http://ws.nausys.com/CBMS-external/rest/yachtReservation/v6/options";
+            string result = CallNauSysApi(url, json);
+            Console.WriteLine(result);
+            OptionsListResponseDto response = JsonConvert.DeserializeObject<OptionsListResponseDto>(result);
+            return response;
+        }
+
+        public OptionsListResponseDto AllBookings(string periodFrom, string periodTo)
+        {
+            CredentialsDto credentials = GetCredentials();
+            OptionsListRequestDto request = new OptionsListRequestDto();
+            request.credentials = credentials;
+            request.periodFrom = periodFrom;
+            request.periodTo = periodTo;
+
+            string json = JsonConvert.SerializeObject(request);
+            Console.WriteLine(json);
+            string url = "http://ws.nausys.com/CBMS-external/rest/yachtReservation/v6/reservations";
+            string result = CallNauSysApi(url, json);
+            Console.WriteLine(result);
+            OptionsListResponseDto response = JsonConvert.DeserializeObject<OptionsListResponseDto>(result);
+            return response;
+        }
 
         public LocationsResponseDto Locations()
         {

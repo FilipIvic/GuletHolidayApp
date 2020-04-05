@@ -12,7 +12,7 @@
 
     <Grid Margin="0,0,0,0">
         <StackLayout Margin="30,30,30,0">
-            <AbsoluteLayout>
+            <AbsoluteLayout Padding="0,20,0,0">
                 <ActivityIndicator x:Name="activity"  
                        AbsoluteLayout.LayoutBounds="0.5, 0.5, 100, 100"
                        AbsoluteLayout.LayoutFlags="PositionProportional" 
