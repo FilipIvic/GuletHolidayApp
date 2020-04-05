@@ -70,7 +70,7 @@ namespace GuletHolidayApp.Views
             Device.BeginInvokeOnMainThread(async () =>
             {
                 BookingController controller = new BookingController();
-                InfoResponseDto response = controller.CreateOption(reservation.yachtId, reservation.periodFrom, reservation.periodTo);
+                OptionResponseDto response = controller.CreateOption(reservation.yachtId, reservation.periodFrom, reservation.periodTo);
 
                 NextPage(response.status, ShipConstants.ReservationTypeOption, "Successful Option transaction");
                 activity.IsVisible = false;
@@ -115,7 +115,7 @@ namespace GuletHolidayApp.Views
             Device.BeginInvokeOnMainThread(async () =>
             {
                 BookingController controller = new BookingController();
-                BookingResponseDto response = controller.CreateBooking(reservation.id, reservation.periodFrom, reservation.periodTo, reservation.reservationType);
+                BookingResponseDto response = controller.CreateBooking(reservation.id, reservation.periodFrom, reservation.periodTo, reservation.reservationType, reservation.yachtId);
                 NextPage(response.status, ShipConstants.ReservationTypeReserved, "Successful Booking transaction");
                 activity.IsVisible = true;
             });

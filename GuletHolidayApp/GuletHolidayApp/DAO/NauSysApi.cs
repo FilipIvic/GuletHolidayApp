@@ -19,6 +19,7 @@ namespace GuletHolidayApp.DAO
             ReservationResponseDto response = JsonConvert.DeserializeObject<ReservationResponseDto>(result);
             return response;
         }
+
         public InfoResponseDto CreateInfo(int yachtId, string periodFrom, string periodTo)
         {
             CredentialsDto credentials = GetCredentials();
@@ -52,6 +53,7 @@ namespace GuletHolidayApp.DAO
             InfoResponseDto response = JsonConvert.DeserializeObject<InfoResponseDto>(result);
             return response;
         }
+
         public OptionResponseDto CreateOption(int id, string uuid)
         {
             CredentialsDto credentials = GetCredentials();
@@ -102,6 +104,7 @@ namespace GuletHolidayApp.DAO
             BookingResponseDto response = JsonConvert.DeserializeObject<BookingResponseDto>(result);
             return response;
         }
+
         public BookingResponseDto StornoBooking(int id, string uuid)
         {
             CredentialsDto credentials = GetCredentials();

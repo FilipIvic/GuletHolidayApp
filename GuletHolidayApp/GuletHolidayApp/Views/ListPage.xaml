@@ -30,12 +30,13 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Grid BackgroundColor= "#7029AF" Padding="0,0,0,0">
+            <Grid BackgroundColor= "#7029AF" Padding="0,0,0,40">
                 <ListView x:Name="listView" ItemSelected="ListView_ItemSelected" SeparatorColor="#000000" Visual="Material" RowHeight="70">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <Grid Margin="0,0,0,0" BackgroundColor="{Binding reservationType, Converter={StaticResource typeToColor}}">
+
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="100" />
                                         <ColumnDefinition Width="200" />
@@ -85,13 +86,11 @@
                                                     HorizontalOptions="CenterAndExpand"
                                                     VerticalTextAlignment="Center">
                                     </Label>
-
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Label x:Name="yachtIdLabel" IsVisible="False"></Label>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

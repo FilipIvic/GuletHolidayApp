@@ -11,12 +11,12 @@ namespace GuletHolidayApp.Controller
     {
         public ReservationResponseDto GetReservations(int yachtId, string year)
         {
-            //pišemo API zahtjev te dohvaćamo Sve rezervacije za sve brodove u godini (+ info )
             ReservationResponseDto response = null;
             try
             {
                 NauSysApi nauSysApi = new NauSysApi();
                 response = nauSysApi.Occupancy(year);
+
                 if(ShipConstants.OK.Equals(response.status))
                 {
                     List<ReservationDto> reservations = response.reservations;
@@ -40,11 +40,9 @@ namespace GuletHolidayApp.Controller
                                 x.checkInTime = dto.checkInTime;
                                 x.checkOutTime = dto.checkOutTime;
                                 x.optionValidTill = dto.optionValidTill;
-                                //x.periodFromTo = dto.periodFrom + "\n" + dto.periodTo;
                             }
                         }
                     }
-                    //SetColorReservation(reservationsWeeks);
                     response.reservations = reservationsWeeks;
                 }        
             }

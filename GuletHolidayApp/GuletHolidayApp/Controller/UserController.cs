@@ -11,7 +11,7 @@ namespace GuletHolidayApp.Controller
 {
     class UserController
     {
-        public UserResponseDto GetUser(int idUser)
+        /*public UserResponseDto GetUser(int idUser)
         {
             UserResponseDto response = new UserResponseDto();
             
@@ -34,7 +34,7 @@ namespace GuletHolidayApp.Controller
                     conn.Close();      
             }
             return response;
-        }
+        }*/
 
         public UserResponseDto GetUser(string username, string password)
         {

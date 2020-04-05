@@ -3,49 +3,48 @@ using GuletHolidayApp.Models;
 using GuletHolidayApp.Utility;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GuletHolidayApp.Controller
 {
     class BookingController
     {
-        public InfoResponseDto CreateOption(int yachtId, string periodFrom, string periodTo)
+        public OptionResponseDto CreateOption(int yachtId, string periodFrom, string periodTo)
         {
-            //pišemo API zahtjev te dohvaćamo info za rezervaciju
-            InfoResponseDto response = null;
+            OptionResponseDto response = null;
             try
             {
                 NauSysApi nauSysApi = new NauSysApi();
-                response = nauSysApi.CreateInfo(yachtId,periodFrom,periodTo);
-                if (ShipConstants.OK.Equals(response.status))
+                InfoResponseDto infoResponse = nauSysApi.CreateInfo(yachtId,periodFrom,periodTo);
+                if (ShipConstants.OK.Equals(infoResponse.status))
                 {
-                    //za sda ne treba nista od Option responsa (oism statusa)
-                    OptionResponseDto optResponse = nauSysApi.CreateOption(response.id, response.uuid);
-                    response.status = optResponse.status;
-                    Console.WriteLine(response.ToString());
+                    response = nauSysApi.CreateOption(infoResponse.id, infoResponse.uuid);
+                }
+                else
+                {
+                    response = new OptionResponseDto();
+                    response.status = ShipConstants.ERROR + infoResponse.status;
                 }
             }
             catch (Exception e)
             {
-                response = new  InfoResponseDto();
+                response = new  OptionResponseDto();
                 response.status = ShipConstants.ERROR + e.Message;
             }
             return response;
         }
 
+
         public OptionResponseDto StornoOption(int id, string periodFrom, string periodTo)
         {
-
             OptionResponseDto response = null;
             try
             {
                 NauSysApi nauSysApi = new NauSysApi();
                 OptionsListResponseDto listResponse = nauSysApi.AllOptions(periodFrom, periodTo);
+
                 string uuid = GetUuid(listResponse.status, id, listResponse.reservations);
 
                 response = nauSysApi.StornoOption(id, uuid);
-                Console.WriteLine(response.ToString());
-
             }
             catch (Exception e)
             {
@@ -55,18 +54,41 @@ namespace GuletHolidayApp.Controller
             return response;
         }
 
-        public BookingResponseDto CreateBooking(int id, string periodFrom, string periodTo, string reservationType)
-        {
 
+        public BookingResponseDto CreateBooking(int id, string periodFrom, string periodTo, string reservationType, int yachtId)
+        {
             BookingResponseDto response = null;
             try
             {
                 NauSysApi nauSysApi = new NauSysApi();
-                OptionsListResponseDto listResponse = nauSysApi.AllOptions(periodFrom, periodTo);
-                string uuid = GetUuid(listResponse.status, id, listResponse.reservations);
-
-                response = nauSysApi.CreateBooking(id, uuid);
-                Console.WriteLine(response.ToString());
+                if(ShipConstants.ReservationTypeOption.Equals(reservationType))
+                {
+                    OptionsListResponseDto listResponse = nauSysApi.AllOptions(periodFrom, periodTo);
+                    string uuid = GetUuid(listResponse.status, id, listResponse.reservations);
+                    response = nauSysApi.CreateBooking(id, uuid);
+                }
+                else
+                {
+                    InfoResponseDto infoResponse = nauSysApi.CreateInfo(yachtId, periodFrom, periodTo);
+                    if (ShipConstants.OK.Equals(infoResponse.status))
+                    {
+                        OptionResponseDto optionResponse = nauSysApi.CreateOption(infoResponse.id, infoResponse.uuid);
+                        if (ShipConstants.OK.Equals(optionResponse.status))
+                        {
+                            response = nauSysApi.CreateBooking(infoResponse.id, infoResponse.uuid);
+                        }
+                        else
+                        {
+                            response = new BookingResponseDto();
+                            response.status = ShipConstants.ERROR + optionResponse.status;
+                        }
+                    }
+                    else
+                    {
+                        response = new BookingResponseDto();
+                        response.status = ShipConstants.ERROR + infoResponse.status;
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -75,6 +97,7 @@ namespace GuletHolidayApp.Controller
             }
             return response;
         }
+
 
         public BookingResponseDto StornoBooking(int id, string periodFrom, string periodTo)
         {
@@ -87,8 +110,6 @@ namespace GuletHolidayApp.Controller
                 string uuid = GetUuid(listResponse.status, id, listResponse.reservations);
 
                 response = nauSysApi.StornoBooking(id, uuid);
-                Console.WriteLine(response.ToString());
-
             }
             catch (Exception e)
             {
@@ -97,6 +118,7 @@ namespace GuletHolidayApp.Controller
             }
             return response;
         }
+
 
         private string GetUuid(string status, int id, List<UuidDto> reservations)
         {
@@ -118,10 +140,9 @@ namespace GuletHolidayApp.Controller
             }
             else
             {
-                throw new Exception(status);
+                throw new Exception(ShipConstants.ERROR + status);
             }
             return uuid;
         }
-
     }
 }

@@ -18,6 +18,7 @@ namespace GuletHolidayApp
     {
         public  MainPage()
         {
+            /*
             InitializeComponent();
             
             Console.WriteLine("Hello World!");
@@ -39,12 +40,15 @@ namespace GuletHolidayApp
                 firstName.Text = user.GetFirstName();
                 lastName.Text = user.GetLastName();
             }
+            */
         }
 
+        /*
         async void OnNext(object sender, EventArgs e)
         {
             
             await Navigation.PushAsync(new Views.Login());
         }
+        */
     }
 }

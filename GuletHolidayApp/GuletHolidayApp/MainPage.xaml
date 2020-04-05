@@ -6,18 +6,4 @@
              mc:Ignorable="d"
              x:Class="GuletHolidayApp.MainPage">
 
-    <StackLayout>
-
-        <Label x:Name="id" ></Label>
-        <Label x:Name="username" ></Label>
-        <Label x:Name="password" ></Label>
-        <Label x:Name="yachtId" ></Label>
-        <Label x:Name="yachtName" ></Label>
-        <Label x:Name="firstName" ></Label>
-        <Label x:Name="lastName" ></Label>
-        
-        <Button Text="Next" Clicked="OnNext"></Button>
-
-    </StackLayout>
-
 </ContentPage>
