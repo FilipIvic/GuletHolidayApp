@@ -2,11 +2,13 @@
 using GuletHolidayApp.Models;
 using GuletHolidayApp.Utility;
 using System;
+using System.ComponentModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace GuletHolidayApp.Views
 {
+    [DesignTimeVisible(false)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Login : ContentPage
     {
@@ -50,18 +52,11 @@ namespace GuletHolidayApp.Views
                         Settings.LastUsedUsername = string.Empty;
                         Settings.LastUsedPassword = string.Empty;
                     }
-                    await Navigation.PushAsync(new ListPage(response.user));
+                    await Navigation.PushAsync(new ListPage(response.user, DateTime.Now.Year.ToString()));
                 }
                 activity.IsVisible = false;
             });
         }
-
-        /*async void buttonNext_Clicked(object sender, EventArgs e)
-        {
-            UserDto user = new UserDto();
-            user.SetYachtId(102759);
-            await Navigation.PushAsync(new ListPage(user));
-        }*/
 
         protected override bool OnBackButtonPressed()
         {

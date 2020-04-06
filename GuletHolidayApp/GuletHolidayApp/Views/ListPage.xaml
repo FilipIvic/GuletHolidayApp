@@ -16,7 +16,29 @@
                 IconImageSource= "{localPicture:EmbeddedImage GuletHolidayApp.Images.Logout.png}"
                 Order="Primary"
                 Priority="0"
-                Clicked="ToolbarItem_Clicked"/>
+                Clicked="ToolbarItem_Clicked">
+        </ToolbarItem>
+        
+        <ToolbarItem 
+                Order="Secondary"
+                Text="2020"
+                Priority="0"
+                Clicked="ToolbarItem_Clicked_2020">
+        </ToolbarItem>
+        
+        <ToolbarItem 
+                Order="Secondary"
+                Text="2021"
+                Priority="0"
+                Clicked="ToolbarItem_Clicked_2021">
+        </ToolbarItem>
+
+        <ToolbarItem 
+                Order="Secondary"
+                Text="2022"
+                Priority="0"
+                Clicked="ToolbarItem_Clicked_2022">
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Resources>

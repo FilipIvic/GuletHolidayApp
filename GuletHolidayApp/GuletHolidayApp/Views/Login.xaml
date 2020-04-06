@@ -77,13 +77,6 @@
                 TextColor="Red"
                 IsVisible="False">
             </Label>
-
-            <!--Button x:Name="buttonNext"
-                Text="Next"
-                TextColor="White"
-                Clicked="buttonNext_Clicked">
-            </!-->
-
         </StackLayout>
     </Grid>
 
