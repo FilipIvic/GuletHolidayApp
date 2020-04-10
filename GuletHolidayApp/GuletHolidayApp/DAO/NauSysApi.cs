@@ -2,6 +2,7 @@
 using GuletHolidayApp.Utility;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace GuletHolidayApp.DAO
             string json = JsonConvert.SerializeObject(credentials);
             string url = "http://ws.nausys.com/CBMS-external/rest/yachtReservation/v6/occupancy/" + ShipConstants.CompanyId + "/" + year;
             string result = CallNauSysApi(url, json);
+            //Console.WriteLine(result);
             ReservationResponseDto response = JsonConvert.DeserializeObject<ReservationResponseDto>(result);
             return response;
         }
@@ -81,10 +83,10 @@ namespace GuletHolidayApp.DAO
             request.uuid = uuid;
      
             string json = JsonConvert.SerializeObject(request);
-            Console.WriteLine(json);
+            //Console.WriteLine(json);
             string url = "http://ws.nausys.com/CBMS-external/rest/booking/v6/stornoOption";
             string result = CallNauSysApi(url, json);
-            Console.WriteLine(result);
+            //Console.WriteLine(result);
             OptionResponseDto response = JsonConvert.DeserializeObject<OptionResponseDto>(result);
             return response;
         }
@@ -115,10 +117,10 @@ namespace GuletHolidayApp.DAO
             request.uuid = uuid;
 
             string json = JsonConvert.SerializeObject(request);
-            Console.WriteLine(json);
+            //Console.WriteLine(json);
             string url = "http://ws.nausys.com/CBMS-external/rest/booking/v6/stornoBooking";
             string result = CallNauSysApi(url, json);
-            Console.WriteLine(result);
+            //Console.WriteLine(result);
             BookingResponseDto response = JsonConvert.DeserializeObject<BookingResponseDto>(result);
             return response;
         }
@@ -132,10 +134,10 @@ namespace GuletHolidayApp.DAO
             request.periodTo = periodTo;
 
             string json = JsonConvert.SerializeObject(request);
-            Console.WriteLine(json);
+            //Console.WriteLine(json);
             string url = "http://ws.nausys.com/CBMS-external/rest/yachtReservation/v6/options";
             string result = CallNauSysApi(url, json);
-            Console.WriteLine(result);
+            //Console.WriteLine(result);
             OptionsListResponseDto response = JsonConvert.DeserializeObject<OptionsListResponseDto>(result);
             return response;
         }
@@ -149,13 +151,36 @@ namespace GuletHolidayApp.DAO
             request.periodTo = periodTo;
 
             string json = JsonConvert.SerializeObject(request);
-            Console.WriteLine(json);
+            //Console.WriteLine(json);
             string url = "http://ws.nausys.com/CBMS-external/rest/yachtReservation/v6/reservations";
             string result = CallNauSysApi(url, json);
-            Console.WriteLine(result);
+            //Console.WriteLine(result);
             OptionsListResponseDto response = JsonConvert.DeserializeObject<OptionsListResponseDto>(result);
             return response;
         }
+
+
+        public FreeYachtResponseDto FreeYacht(int yachtId, string periodFrom, string periodTo)
+        {
+            List<int> yachts = new List<int>();
+            yachts.Add(yachtId);
+
+            CredentialsDto credentials = GetCredentials();
+
+            FreeYachtRequestDto request = new FreeYachtRequestDto();
+            request.credentials = credentials;
+            request.periodFrom = periodFrom;
+            request.periodTo = periodTo;
+            request.yachts = yachts;
+
+            string json = JsonConvert.SerializeObject(request);
+            string url = "http://ws.nausys.com/CBMS-external/rest/yachtReservation/v6/freeYachts";
+            string result = CallNauSysApi(url, json);
+            //Console.WriteLine(result);
+            FreeYachtResponseDto response = JsonConvert.DeserializeObject<FreeYachtResponseDto>(result);
+            return response;
+        }
+
 
         public LocationsResponseDto Locations()
         {

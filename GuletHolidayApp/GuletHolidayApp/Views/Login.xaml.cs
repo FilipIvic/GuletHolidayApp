@@ -36,7 +36,7 @@ namespace GuletHolidayApp.Views
 
                 if (ShipConstants.NOK.Equals(response.status))
                 {
-                    await DisplayAlert("Error!", response.message, "OK");
+                    await DisplayAlert(ShipConstants.ERROR, response.message, "OK");
                     usernameEntry.Text = "";
                     passwordEntry.Text = "";
                 }
@@ -62,6 +62,5 @@ namespace GuletHolidayApp.Views
         {
             return true;
         }
-
     }
 }

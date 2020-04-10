@@ -12,6 +12,9 @@
         public string periodTo { get; set; }
         public string checkOutTime { get; set; }
         public string optionValidTill { get; set; }
+        public string priceListPrice { get; set; }
+        public string clientPrice { get; set; }
+
         //public string periodFromTo { get; set; }
         //public string color { get; set; }
 

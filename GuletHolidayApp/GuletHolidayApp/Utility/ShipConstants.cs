@@ -7,6 +7,7 @@ namespace GuletHolidayApp.Utility
         public const string OK = "OK";
         public const string NOK = "NOK";
         public const string ERROR = "ERROR:";
+        public const string SYSTEM_ERROR = "SYSTEM ERROR:";
 
         public const long CompanyId = 102701;
         public const string Username = "rest11@TCC";

@@ -13,23 +13,22 @@ namespace GuletHolidayApp.DAO
             return conn;
         }
 
-        public static void close(SqlConnection  conn)
+        public static void Close(SqlConnection  conn)
         {
             if (conn != null)
                 conn.Close();
         }
 
-        public static void close(SqlDataReader dataReader)
+        public static void Close(SqlDataReader dataReader)
         {
             if (dataReader != null)
                 dataReader.Close();
         }
 
-        public static void dispose(SqlCommand command)
+        public static void Dispose(SqlCommand command)
         {
             if (command != null)
                 command.Dispose();
         }
-
     }
 }

@@ -16,39 +16,22 @@ namespace GuletHolidayApp
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        public  MainPage()
+        public MainPage()
         {
-            /*
             InitializeComponent();
-            
-            Console.WriteLine("Hello World!");
 
-            UserController controller = new UserController();
-            UserResponseDto response = controller.GetUser(3);
-            if(ShipConstants.NOK.Equals(response.status))
-            {
-                DisplayAlert("Error!", response.message, "OK");
-            }
-            else
-            {
-                UserDto user = response.user;
-                id.Text = user.GetId().ToString();
-                username.Text = user.GetUsername();
-                password.Text = user.GetPassword();
-                yachtId.Text = user.GetYachtId().ToString();
-                yachtName.Text = user.GetYachtName();
-                firstName.Text = user.GetFirstName();
-                lastName.Text = user.GetLastName();
-            }
-            */
+            Exit(null,null);
         }
 
-        /*
-        async void OnNext(object sender, EventArgs e)
+        internal async void Exit(object sender, EventArgs e)
         {
-            
-            await Navigation.PushAsync(new Views.Login());
+            await DisplayAlert(ShipConstants.ERROR, "NO INTERNET CONNECTION!", "OK");
+            System.Environment.Exit(0);
         }
-        */
+
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
+        }
     }
 }

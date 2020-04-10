@@ -3,6 +3,7 @@ using GuletHolidayApp.DAO;
 using GuletHolidayApp.Models;
 using GuletHolidayApp.Utility;
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,11 +24,19 @@ namespace GuletHolidayApp
 
         protected  override void OnStart()
         {
-            NauSysApi api = new NauSysApi();
-            LocationsResponseDto response = api.Locations();
-            ShipVariables.locations = response.locations;
+            try
+            {
+                List<PeriodPriceDto> PeriodPrice = new List<PeriodPriceDto>();
+                ShipVariables.PeriodPrice = PeriodPrice;
 
-
+                NauSysApi api = new NauSysApi();
+                LocationsResponseDto response = api.Locations();
+                ShipVariables.locations = response.locations;
+            }
+            catch (Exception e)
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
         }
 
         protected override void OnSleep()

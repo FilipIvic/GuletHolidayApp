@@ -43,6 +43,8 @@
     
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local:OtherTypeVisibleConverter x:Key="otherTypeVisible"/>
+            <local:FreeTypeVisibleConverter x:Key="freeTypeVisible"/>
             <local:IdToLocationConverter x:Key="idToLocation"/>
             <local:ReservationTypeToColorConverter x:Key="typeToColor"/>
             <local:ReservationTypeToColorBoxConverter x:Key="typeToColorBox"/>
@@ -66,47 +68,59 @@
                                     </Grid.ColumnDefinitions>
 
                                     <BoxView Grid.Column="0" 
-                                                     BackgroundColor="{Binding reservationType, Converter={StaticResource typeToColorBox}}">
+                                                BackgroundColor="{Binding reservationType, Converter={StaticResource typeToColorBox}}">
                                     </BoxView>
 
                                     <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
                                         <Label Grid.Column="0" 
-                                                        MinimumWidthRequest="100"
-                                                        Margin="5,0,0,5"
-                                                        Text="{Binding periodFrom}"
-                                                        TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
-                                                        HorizontalOptions="Center"
-                                                        VerticalTextAlignment="Center">
+                                                MinimumWidthRequest="100"
+                                                Margin="5,0,0,5"
+                                                Text="{Binding periodFrom}"
+                                                TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
+                                                HorizontalOptions="Center"
+                                                VerticalTextAlignment="Center">
                                         </Label>
                                         <Label Grid.Column="0" 
-                                                    MinimumWidthRequest="100"
-                                                    Margin="5,5,0,0"
-                                                    Text="{Binding periodTo}"
-                                                    TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
-                                                    HorizontalOptions="Center"
-                                                    VerticalTextAlignment="Center">
+                                                MinimumWidthRequest="100"
+                                                Margin="5,5,0,0"
+                                                Text="{Binding periodTo}"
+                                                TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
+                                                HorizontalOptions="Center"
+                                                VerticalTextAlignment="Center">
                                         </Label>
                                     </StackLayout>
 
                                     <Label Grid.Column="1"
-                                                MinimumWidthRequest="200"
-                                                Text="{Binding locationFromId, Converter={StaticResource idToLocation}}"
-                                                TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
-                                                Margin="0,5,0,5"
-                                                HorizontalOptions="CenterAndExpand"
-                                                VerticalTextAlignment="Center">
+                                            MinimumWidthRequest="200"
+                                            Text="{Binding priceListPrice}"
+                                            TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
+                                            Margin="0,5,0,5"
+                                            HorizontalOptions="CenterAndExpand"
+                                            IsVisible="{Binding reservationType, Converter={StaticResource freeTypeVisible}}"
+                                            VerticalTextAlignment="Center">
+                                    </Label>
+
+                                    <Label Grid.Column="1"
+                                            MinimumWidthRequest="200"
+                                            Text="{Binding locationFromId, Converter={StaticResource idToLocation}}"
+                                            TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
+                                            Margin="0,5,0,5"
+                                            HorizontalOptions="CenterAndExpand"
+                                            IsVisible="{Binding reservationType, Converter={StaticResource otherTypeVisible}}"
+                                            IsEnabled="True"
+                                            VerticalTextAlignment="Center">
                                     </Label>
 
                                     <BoxView Grid.Column="2" 
                                                      BackgroundColor="{Binding reservationType, Converter={StaticResource typeToColorBox}}">
                                     </BoxView>
                                     <Label Grid.Column="2"
-                                                    MinimumHeightRequest="100"
-                                                    Margin="5,0,0,0"
-                                                    Text="{Binding reservationType}"
-                                                    TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
-                                                    HorizontalOptions="CenterAndExpand"
-                                                    VerticalTextAlignment="Center">
+                                            MinimumHeightRequest="100"
+                                            Margin="5,0,0,0"
+                                            Text="{Binding reservationType}"
+                                            TextColor="{Binding reservationType, Converter={StaticResource typeToColorText}}"
+                                            HorizontalOptions="CenterAndExpand"
+                                            VerticalTextAlignment="Center">
                                     </Label>
                                 </Grid>
                             </ViewCell>

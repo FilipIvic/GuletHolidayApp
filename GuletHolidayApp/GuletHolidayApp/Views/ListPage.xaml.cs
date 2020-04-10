@@ -19,6 +19,7 @@ namespace GuletHolidayApp.Views
             InitializeComponent();
 
             yachtId = user.GetYachtId();
+            //yachtId = 102759;
             listYear = year;
             this.user = user;
 

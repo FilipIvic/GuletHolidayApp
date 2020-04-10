@@ -43,6 +43,15 @@ namespace GuletHolidayApp.Controller
                             }
                         }
                     }
+
+                    //price
+                    PriceController controller = new PriceController();
+                    foreach (ReservationDto dto in reservationsWeeks)
+                    {
+                        PeriodPriceDto price = controller.GetPrice(yachtId, dto.periodFrom, dto.periodTo, dto.reservationType);
+                        dto.priceListPrice = price.priceListPrice;
+                        dto.clientPrice = price.clientPrice;                        
+                    }
                     response.reservations = reservationsWeeks;
                 }        
             }
